@@ -1,0 +1,47 @@
+# IP des autres ATE
+ate: 
+    - 192.168.1.1
+    - 192.168.2.1
+    - 192.168.0.254
+    - 127.0.0.1
+    - 10.54.128.1
+    - 5.151.66.124
+    
+# Containers présent sur le réseau
+containers:
+    - Main-Container
+    - c1
+   
+# Problème CARP   
+carp:
+    probleme: C:\prob.conf
+    
+# Configuration optimiseur génétique pour le CARP
+carpgen:
+    parametre:
+        generation: 1000
+        population: 400
+        prob_crois: 0.6
+        prob_muta: 0.4
+        survie: 0.2
+    operateur:    
+        croisement:
+            - lox
+            - ox
+            - x1
+        mutation:
+            - move
+            - swap
+            
+# Configuration ACO pour le CARP
+carpfourmis:
+    iteration: 200
+    fourmis: 30
+    ratio_vue: 1
+    ratio_odorat: 1
+    persistance: 0.9
+    taille_memoire: 10
+    depl_aveugle: 0.1
+    rech_locale: 0.5
+    nb_elites: 5
+    raz: 10
