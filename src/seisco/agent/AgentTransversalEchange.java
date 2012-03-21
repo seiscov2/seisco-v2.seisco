@@ -106,6 +106,7 @@ public abstract class AgentTransversalEchange extends Agent {
         this.etats.add(new Etat("solutionPresente", false));
         this.etats.add(new Etat("finRecupSolution", false));
         this.etats.add(new Etat("envoiSolution", false));
+        this.etats.add(new Etat("solutionsRecues", false));
         
         // Initialisation des comportements
         addBehaviour(new RecupererSolution(this));
