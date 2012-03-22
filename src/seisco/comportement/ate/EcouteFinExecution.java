@@ -38,7 +38,7 @@ public class EcouteFinExecution extends CyclicBehaviour {
             if(msgRecu.getPerformative() == ACLMessage.INFORM) {
                 
                 // On vérifie si c'est le meilleur AMC
-                if(msgRecu.getSender() == ate.getCacheAMC()) {
+                if(msgRecu.getSender().getLocalName().equals(ate.getCacheAMC().getLocalName())) {
                     // On vérifie le cache
                     if(ate.getCacheSolution() == null) {
                         // On récupère la solution
@@ -46,13 +46,12 @@ public class EcouteFinExecution extends CyclicBehaviour {
                         ate.setEtat("demandeSolution", true);
                     } else {
                        // Envoi du message de fin
-                        envoiFinCouple(msgRecu.getSender()); 
+                        envoiFinCouple(msgRecu.getSender());
                     }
                 } else {
                     // Envoi du message de fin
                     envoiFinCouple(msgRecu.getSender());
                 }
-                
             }
         }
         
@@ -71,12 +70,21 @@ public class EcouteFinExecution extends CyclicBehaviour {
     /**
      * <p>Permet d'envoyer un message d'arret à l'AMC.
      * <p>Retire également le controlleur AME associé.
+     * <p>Incrémente de 1 le nombre d'agents arretés.
      * 
      * @param amc 
      *      L'AID de l'AMC à qui il faut confirmer l'arret.
      * @since 2012
      */
     protected void envoiFinCouple(AID amc) {
+        
+        // Retrait de controlleur - TODO
+        
+        
+        // Ajout de 1 au compteur
+        ate.setNbAgentsArretes(ate.getNbAgentsArretes() + 1);
+        
+        // Message d'arret
         MessageHelper mh = new MessageHelper();
         mh.create(ACLMessage.CONFIRM, MessageHelper.ID_FIN_EXEC);
         mh.addReceiver(amc);

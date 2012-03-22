@@ -38,6 +38,8 @@ public abstract class AgentTransversalEchange extends Agent {
     protected List<AID> ates;
     protected AID cacheDemandeurSolution;
     
+    protected int nbAgentsArretes;
+    
     /**
      * <p>Initilisation de l'agent.
      * <ul>
@@ -61,6 +63,8 @@ public abstract class AgentTransversalEchange extends Agent {
         this.cacheAMC = null;
         
         this.ates = new ArrayList<AID>();
+        
+        this.nbAgentsArretes = 0;
         
         // Initialisation des IP des ATE
         String pathConf = getProperty("confate", "conf"+System.getProperty("file.separator")+"conf_ate.yml");
@@ -355,7 +359,7 @@ public abstract class AgentTransversalEchange extends Agent {
         this.ates = ates;
     }
     
-        /**
+    /**
      * <p>Retourne l'AID de l'ATE faisant une demande de solution.
      * 
      * @return L'AID d'un ATE
@@ -389,6 +393,29 @@ public abstract class AgentTransversalEchange extends Agent {
      */
     public void println(String message) {
         println(message, System.out);
+    }
+    
+    /**
+     * <p>Retourne le nombre d'agents arretés.
+     * 
+     * @return Le nombre d'agents arretés
+     * @since 2012
+     * @see #setNbAgentsArretes(int) 
+     */
+    public int getNbAgentsArretes() {
+        return nbAgentsArretes;
+    }
+    
+    /**
+     * <p>Remplace le nombre d'agents arretés.
+     * 
+     * @param nb
+     *      Le nouveau nombre d'agents
+     * @since 2012
+     * @see #getNbAgentsArretes() 
+     */
+    public void setNbAgentsArretes(int nb)  {
+        this.nbAgentsArretes = nb;
     }
     
     /**

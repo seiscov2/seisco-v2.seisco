@@ -14,7 +14,7 @@ import seisco.util.MessageHelper;
  * <p>ID_RECUP_AMC_SOLUTION
  * 
  * @author Jerome
- * @since 2012
+ * @version 2012
  * @see seisco.comportement.amc.PresenterSolution
  */
 public class RecupererSolution extends CyclicBehaviour {
@@ -30,27 +30,27 @@ public class RecupererSolution extends CyclicBehaviour {
     
     @Override
     public void action() {
-        if((Boolean)((AgentTransversalEchange)myAgent).getEtat("demandeSolution").getValeur()) {
+        if((Boolean)(ate.getEtat("demandeSolution").getValeur())) {
             switch(etape) {
                 case 0:
-                    if(((AgentTransversalEchange)myAgent).getCacheAMC() != null) {
+                    if(ate.getCacheAMC() != null) {
                         MessageHelper mh = new MessageHelper();
 
                         mh.create(ACLMessage.QUERY_IF, MessageHelper.ID_RECUP_AMC_SOLUTION);
-                        mh.addReceiver(((AgentTransversalEchange)myAgent).getCacheAMC());
-                        myAgent.send(mh.get("getSolution"));
+                        mh.addReceiver(ate.getCacheAMC());
+                        ate.send(mh.get("getSolution"));
                         
                         etape = 1;
                     }
                 break;
                 case 1:
                     MessageTemplate mt = MessageTemplate.MatchConversationId(MessageHelper.ID_RECUP_AMC_SOLUTION);
-                    ACLMessage msgRecu = myAgent.receive(mt);
+                    ACLMessage msgRecu = ate.receive(mt);
                     if(msgRecu != null) {
                         if(msgRecu.getPerformative() == ACLMessage.REFUSE) { // AMC non pret
                             System.out.println("Erreur : L'AMC n'est pas pret");
                             etape=0;
-                            myAgent.doWait(30);
+                            ate.doWait(5);
                         } else if(msgRecu.getPerformative() == ACLMessage.INFORM) {
                             if(msgRecu.getLanguage()!=null && msgRecu.getLanguage().equals("JavaSerialization")) {
 
@@ -61,6 +61,8 @@ public class RecupererSolution extends CyclicBehaviour {
                                     ate.println("Erreur: Impossible de décoder la solution\n\t(Raison: "+ex.getMessage()+")");
                                 }
 
+                                ate.println("Solution recue - ");
+                                
                                 ate.setCacheSolution(s);
                                 
                                 ate.setEtat("demandeSolution", false);
