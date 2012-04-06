@@ -10,7 +10,7 @@ import org.apache.commons.codec.binary.Base64;
  * @author Jerome
  * @since 2012
  */
-public class MessageCodec {
+public class ObjectCodec {
     /**
      * <p>Permet la sérialisation et l'encodage en Base64 d'un objet.
      * 

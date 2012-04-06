@@ -37,8 +37,10 @@ public class EcouteFinExecution extends CyclicBehaviour {
         if(msgRecu != null) {
             if(msgRecu.getLanguage() != null && msgRecu.getLanguage().equals("JavaSerialization")) {
                 if(msgRecu.getPerformative() == ACLMessage.INFORM) {
-                    if(msgRecu.getSender().getLocalName().equals(ame.getAMC().getLocalName())) // seul l'amc peut lui envoyer ce message
+                    if(msgRecu.getSender().getLocalName().equals(ame.getAMC().getLocalName())) { // seul l'amc peut lui envoyer ce message
+                        ame.deregisterDF();
                         ame.doDelete();
+                    }
                 }
             }
         } else

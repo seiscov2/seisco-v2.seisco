@@ -4,7 +4,7 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import seisco.agent.AgentMobileCalcul;
-import seisco.util.MessageCodec;
+import seisco.util.ObjectCodec;
 import seisco.util.MessageHelper;
 
 /**
@@ -47,7 +47,7 @@ public class PresenterSolution extends CyclicBehaviour {
                         rep.addReceiver(msgRecu.getSender());
                         //rep.setObject(amc.getCacheSolution());
                         try {
-                            amc.send(rep.get(MessageCodec.encode(amc.getCacheSolution())));
+                            amc.send(rep.get(ObjectCodec.encode(amc.getCacheSolution())));
                         } catch(Exception ex) {
                             amc.println("Erreur: Impossible d'encoder la solution\n\t(Raison: "+ex.getMessage()+")");
                         }

@@ -5,7 +5,7 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import seisco.agent.AgentTransversalEchange;
 import seisco.probleme.Solution;
-import seisco.util.MessageCodec;
+import seisco.util.ObjectCodec;
 import seisco.util.MessageHelper;
 
 /**
@@ -56,7 +56,7 @@ public class RecupererSolution extends CyclicBehaviour {
 
                                 Solution s = null;
                                 try {
-                                    s = MessageCodec.decode(msgRecu.getContent(), Solution.class);
+                                    s = ObjectCodec.decode(msgRecu.getContent(), Solution.class);
                                 } catch(Exception ex) {
                                     ate.println("Erreur: Impossible de décoder la solution\n\t(Raison: "+ex.getMessage()+")");
                                 }
