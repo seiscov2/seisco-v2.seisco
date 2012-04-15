@@ -82,7 +82,7 @@ public abstract class AgentMobileEchange extends Agent implements AmeDf {
         
         // Initialisation des comportements
         if(!System.getProperty("os.name").toLowerCase().contains("win")) { // Seulement si non windows
-            addBehaviour(new SurveillerMachine(this));
+            //addBehaviour(new SurveillerMachine(this));
         }
         addBehaviour(new EcouteFinExecution(this));
     }

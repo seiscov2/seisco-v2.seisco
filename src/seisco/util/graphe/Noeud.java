@@ -154,4 +154,15 @@ public class Noeud implements Concept, Comparable<Noeud> {
 	public int compareTo(Noeud o) {
 		return Float.compare(minDistance.getValeur(), o.minDistance.getValeur());
 	}
+        
+        /**
+         * <p>
+         * Initialisation des noeuds à 1.
+         * Remise à zéro du comptage des noeuds
+         * 
+         * @since 2012
+         */
+        public static void init() {
+            lastNum = 1;
+        }
 }
