@@ -467,6 +467,15 @@ public class Arc implements Concept {
      * @since 2012
      */
     public Arc clone() {
-        return new Arc(depart, arrivee, false);
+        Arc clone = new Arc(depart, arrivee, false);
+        clone.inv = this.inv;
+        
+        for (Cout cout : this.couts)
+            clone.ajouterCout(cout);
+        
+        for (Propriete propriete : this.proprietes)
+            clone.ajouterPropriete(propriete);
+        
+        return clone;
     }
 }
