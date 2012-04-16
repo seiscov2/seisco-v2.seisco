@@ -45,6 +45,7 @@ public class Arc implements Concept {
 
     protected Noeud depart;
     protected Noeud arrivee;
+    private boolean inv;
 	
     /**
      * <p>
@@ -387,10 +388,15 @@ public class Arc implements Concept {
      * @since 2012
      */
 	@Override
-	public boolean equals(Object o) {
-		if (o instanceof Arc)
-			return depart.equals(((Arc)o).depart)
-					&& arrivee.equals(((Arc)o).arrivee);
+	public boolean equals(Object o) {        
+		if (o instanceof Arc) {
+            if(this.inv == ((Arc)o).inv)
+                return depart.equals(((Arc)o).depart)
+                    	&& arrivee.equals(((Arc)o).arrivee);
+            else
+                return depart.equals(((Arc)o).arrivee)
+                    	&& arrivee.equals(((Arc)o).depart);
+        }
 		
 		return false;
 	}
@@ -424,5 +430,43 @@ public class Arc implements Concept {
             resultat += p.toString() + "\n";
 
         return resultat;
+    }
+
+    /**
+     * <p>Indique si l'arc est inversé
+     * 
+     * @return
+     *  <p> <b>true</b> si l'arc est inversé
+     *  <p> <b>false</b> sinon
+     * @since 2012
+     * @see #swap() 
+     */
+    public boolean isInv() {
+        return inv;
+    }
+    
+    /**
+     * <p>Inverse le sens de traversée de l'arc
+     * 
+     * @return l'arc courant lui même
+     * @since 2012
+     * @see #isInv() 
+     */
+    public Arc swap() {
+        Noeud temp = this.arrivee;
+        this.arrivee = this.depart;
+        this.depart = temp;
+        this.inv = !this.inv;
+        return this;
+    }
+
+    /**
+     * <p>Renvoie une copie exacte de l'{@link Arc} courant
+     * 
+     * @return une copie exacte de l'{@link Arc} courant
+     * @since 2012
+     */
+    public Arc clone() {
+        return new Arc(depart, arrivee, false);
     }
 }
