@@ -478,4 +478,15 @@ public class Arc implements Concept {
         
         return clone;
     }
+    
+    /**
+     * <p>
+     * Initialisation des arcs à 1.
+     * Remise à zéro du comptage des arcs
+     * 
+     * @since 2012
+     */
+    public static void init() {
+        lastNum = 1;
+    }
 }
