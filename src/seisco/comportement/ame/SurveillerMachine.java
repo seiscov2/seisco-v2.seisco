@@ -27,22 +27,24 @@ public class SurveillerMachine extends CyclicBehaviour {
     }
     
     @Override
-    public void action() {
-        int chargeCpuMax = Integer.parseInt(ame.getParam("charge_cpu").getValeur().toString());
-        
-        if(determinerChargeCPU() > chargeCpuMax) { // Déplacer
-            ContainerID loc = new ContainerID();
-            
-            int id = ame.getCurrentMachine();
-            List<String> nextMach = ame.getNextMachines();
-            
-            id++;
-            if(id>=nextMach.size()) id=0;
-            ame.setCurrentMachine(id);
-            
-            loc.setName(nextMach.get(id));
+    public void action() { 
+        if(!(Boolean)ame.getEtat("firstMove").getValeur()) {
+            int chargeCpuMax = Integer.parseInt(ame.getParam("charge_cpu").getValeur().toString());
 
-            ame.doMove(loc);
+            if(determinerChargeCPU() > chargeCpuMax) { // Déplacer
+                ContainerID loc = new ContainerID();
+
+                int id = ame.getCurrentMachine();
+                List<String> nextMach = ame.getNextMachines();
+
+                id++;
+                if(id>=nextMach.size()) id=0;
+                ame.setCurrentMachine(id);
+
+                loc.setName(nextMach.get(id));
+
+                ame.doMove(loc);
+            }
         }
     }
     

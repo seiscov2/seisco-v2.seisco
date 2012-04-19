@@ -73,8 +73,7 @@ public class RecupererSolution extends CyclicBehaviour {
                         block(1000);
                 break;
             }
-        } else
-            block(1000);
+        }
     }
 
 }
