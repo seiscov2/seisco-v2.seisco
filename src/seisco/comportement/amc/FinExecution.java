@@ -30,7 +30,7 @@ public class FinExecution extends CyclicBehaviour {
     
     @Override
     public void action() {
-        if((Boolean)amc.getEtat("finExecution").getValeur()) {
+        if((Boolean)amc.getEtat("finExecution").getValeur() && !(Boolean)amc.getEtat("updateSolution").getValeur()) {
             if(this.etape == 1) { // Envoie message à l'ATE
                 MessageHelper mh = new MessageHelper();
                 mh.create(ACLMessage.INFORM, MessageHelper.ID_FIN_EXEC);
